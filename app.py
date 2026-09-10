@@ -49,6 +49,22 @@ def main():
             else:
                 print("Número inválido.")
 
+        elif opcao == "4":
+            if not tarefas:
+                print("Nenhuma tarefa cadastrada.")
+                continue
+
+            for i, tarefa in enumerate(tarefas, 1):
+                print(f"{i} - {tarefa['descricao']}")
+
+            numero = int(input("Digite o número da tarefa que deseja remover: "))
+
+            if 1 <= numero <= len(tarefas):
+                tarefas.pop(numero - 1)
+                print("Tarefa removida!")
+            else:
+                print("Número inválido.")
+
         elif opcao == "5":
             print("Programa encerrado.")
             break
