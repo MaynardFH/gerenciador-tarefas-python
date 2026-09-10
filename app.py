@@ -17,6 +17,7 @@ def main():
 
         if opcao == "1":
             print("\nTarefas:")
+
             if not tarefas:
                 print("Nenhuma tarefa cadastrada.")
             else:
@@ -25,8 +26,28 @@ def main():
 
         elif opcao == "2":
             tarefa = input("Digite a tarefa: ")
-            tarefas.append(tarefa)
+            tarefas.append({
+                "descricao": tarefa,
+                "concluida": False
+            })
             print("Tarefa adicionada!")
+
+        elif opcao == "3":
+            if not tarefas:
+                print("Nenhuma tarefa cadastrada.")
+                continue
+
+            for i, tarefa in enumerate(tarefas, 1):
+                status = "Concluída" if tarefa["concluida"] else "Pendente"
+                print(f"{i} - {tarefa['descricao']} [{status}]")
+
+            numero = int(input("Digite o número da tarefa: "))
+
+            if 1 <= numero <= len(tarefas):
+                tarefas[numero - 1]["concluida"] = True
+                print("Tarefa concluída!")
+            else:
+                print("Número inválido.")
 
         elif opcao == "5":
             print("Programa encerrado.")
