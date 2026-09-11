@@ -1,0 +1,26 @@
+name: CD
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  delivery:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Criar pacote da aplicação
+        run: |
+          zip -r gerenciador-tarefas-python.zip . \
+            -x ".git/*" \
+            -x ".github/*"
+
+      - name: Publicar artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: gerenciador-tarefas-python
+          path: gerenciador-tarefas-python.zip
